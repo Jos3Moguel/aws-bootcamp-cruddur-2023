@@ -77,3 +77,34 @@ If everything works fine, then a json with UserId, Account and Arn is echoed.
 ### 1. Health alerts from services
   1. Created a SNS topic named `health-alerts` and suscribed with an email.
   2. Created EventBridge rule with `Health Event` for Triggering Events and `SNS Topic` for Targets. Then I let it create a new IAM role for the resource.
+
+## Extra tasks
+
+### 1. Remove sensitive data
+Installed Homebrew from: https://brew.sh/
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+Installed `bfg` package then followed the remaining commands:
+```sh
+echo >> /home/vscode/.bashrc
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >> /home/vscode/.bashrc
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+```
+
+Created `replacements.txt` for the sensitive data and moved it backward with `mv replacements.txt ..`.
+Cloned a mirror of the repository to be able to push the changes in all branches and tags
+```sh
+cd ..
+git clone --mirror HTTPS-repository-URL.git <folder_name>
+cd <folder_name>
+```
+Pasted the following commands:
+```sh
+bfg --replace-text ../replacements.txt
+```
+It prompted to do:
+```sh
+git reflog expire --expire=now --all && git gc --prune=now --aggressive
+```
+Finally, did a `git push`.
