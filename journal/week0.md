@@ -94,7 +94,7 @@ If everything works fine, then a json with UserId, Account and Arn is echoed.
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
   ```
   3. Created `replacements.txt` for the sensitive data and moved it backward with `mv replacements.txt ..`.
-
+  4. Deleted the sensitive data from the corresponding files.
 #### 2. Other branches and tags
 The following steps were done for other branches and tags. For `main`, it's just following from the second step below.
   1. Cloned a mirror of the repository to be able to push the changes in all branches and tags.
