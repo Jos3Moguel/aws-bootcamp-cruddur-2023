@@ -80,31 +80,35 @@ If everything works fine, then a json with UserId, Account and Arn is echoed.
 
 ## Extra tasks
 
-### 1. Remove sensitive data
-Installed Homebrew from: https://brew.sh/
-```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-Installed `bfg` package then followed the remaining commands:
-```sh
-echo >> /home/vscode/.bashrc
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >> /home/vscode/.bashrc
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
-```
+### Remove sensitive data
 
-Created `replacements.txt` for the sensitive data and moved it backward with `mv replacements.txt ..`.
-Cloned a mirror of the repository to be able to push the changes in all branches and tags
-```sh
-cd ..
-git clone --mirror HTTPS-repository-URL.git <folder_name>
-cd <folder_name>
-```
-Pasted the following commands:
-```sh
-bfg --replace-text ../replacements.txt
-```
-It prompted to do:
-```sh
-git reflog expire --expire=now --all && git gc --prune=now --aggressive
-```
-Finally, did a `git push`.
+#### 1. Installation of Homebrew
+  1. Installed Homebrew from: https://brew.sh/
+  ```sh
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  ```
+  2. Installed `bfg` package then followed the remaining commands:
+  ```sh
+  echo >> /home/vscode/.bashrc
+  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >> /home/vscode/.bashrc
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+  ```
+  3. Created `replacements.txt` for the sensitive data and moved it backward with `mv replacements.txt ..`.
+
+#### 2. Other branches and tags
+The following steps were done for other branches and tags. For `main`, it's just following the from the second step below.
+  1. Cloned a mirror of the repository to be able to push the changes in all branches and tags.
+  ```sh
+  cd ..
+  git clone --mirror HTTPS-repository-URL.git <folder_name>
+  cd <folder_name>
+  ```
+  2. Pasted the following commands:
+  ```sh
+  bfg --replace-text ../replacements.txt
+  ```
+  3. It prompted to do:
+  ```sh
+  git reflog expire --expire=now --all && git gc --prune=now --aggressive
+  ```
+  4. Finally, did a `git push`.
